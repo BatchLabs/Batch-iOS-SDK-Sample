@@ -1,0 +1,32 @@
+{
+  "pins" : [
+    {
+      "identity" : "batch-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/BatchLabs/Batch-iOS-SDK.git",
+      "state" : {
+        "revision" : "03d985539457918ecf1e191b69fd6d16538a6975",
+        "version" : "1.19.0"
+      }
+    },
+    {
+      "identity" : "batch-ios-sdk-extension",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/BatchLabs/Batch-iOS-SDK-Extension",
+      "state" : {
+        "revision" : "00e98d801be70ef8688e56a8f5a9bc9042307288",
+        "version" : "2.0.1"
+      }
+    },
+    {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "state" : {
+        "revision" : "c4b8660bb3ef543fe4bdcaac0db956b32dc5583f",
+        "version" : "5.13.0"
+      }
+    }
+  ],
+  "version" : 2
+}
