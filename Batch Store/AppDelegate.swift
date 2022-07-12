@@ -3,7 +3,7 @@ import UserNotifications
 
 import Batch
 
-     = "put your apikey here"
+let BatchAPIKey = "put your apikey here"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
