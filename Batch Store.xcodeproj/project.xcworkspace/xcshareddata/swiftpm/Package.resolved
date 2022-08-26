@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BatchLabs/Batch-iOS-SDK.git",
       "state" : {
-        "revision" : "03d985539457918ecf1e191b69fd6d16538a6975",
-        "version" : "1.19.0"
+        "revision" : "52640fa8f487e502e38e5d1d36a0e4c0006e546e",
+        "version" : "1.19.2"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "c4b8660bb3ef543fe4bdcaac0db956b32dc5583f",
-        "version" : "5.13.0"
+        "revision" : "3e48cb68d8e668d146dc59c73fb98cb628616236",
+        "version" : "5.13.2"
       }
     }
   ],
