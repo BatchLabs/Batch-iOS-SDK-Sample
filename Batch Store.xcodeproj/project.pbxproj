@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -876,7 +876,7 @@
 			repositoryURL = "https://github.com/BatchLabs/Batch-iOS-SDK-Extension";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.1;
+				minimumVersion = 3.0.0;
 			};
 		};
 		51C49C5E25F624FF00C8E4F6 /* XCRemoteSwiftPackageReference "Batch-iOS-SDK" */ = {
@@ -884,7 +884,7 @@
 			repositoryURL = "https://github.com/BatchLabs/Batch-iOS-SDK.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.19.0;
+				minimumVersion = 2.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

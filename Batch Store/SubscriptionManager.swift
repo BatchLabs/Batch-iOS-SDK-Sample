@@ -119,24 +119,21 @@ class SubscriptionManager {
     func syncDataWithBatch() {
         let defaults = UserDefaults.standard
 
-        let editor = BatchUser.editor()
-
-        try? editor.set(attribute: defaults.bool(forKey: flashSalesKey), forKey:flashSalesKey)
-        try? editor.set(attribute: defaults.bool(forKey: suggestedContentKey), forKey:suggestedContentKey)
-
-        editor.clearTagCollection(suggestionCategoriesKeys)
-        defaults.stringArray(forKey: suggestionCategoriesKeys)?.forEach({ (category) in
-            editor.addTag(category, inCollection: suggestionCategoriesKeys)
-        })
-
-        editor.clearTagCollection(sourceSubscriptionListKey)
-
-        if UserManager().isLoggedIn {
-            defaults.stringArray(forKey: sourceSubscriptionListKey)?.forEach({ (category) in
-                editor.addTag(category, inCollection: sourceSubscriptionListKey)
+        BatchProfile.editor { editor in
+            try! editor.set(attribute: defaults.bool(forKey: flashSalesKey), forKey: flashSalesKey)
+            try! editor.set(attribute: defaults.bool(forKey: suggestedContentKey), forKey: suggestedContentKey)
+            
+            try! editor.removeAttribute(key: suggestionCategoriesKeys)
+            defaults.stringArray(forKey: suggestionCategoriesKeys)?.forEach({ (category) in
+                try! editor.addToStringArray(item: category, forKey: suggestionCategoriesKeys)
             })
+            
+            try! editor.removeAttribute(key: sourceSubscriptionListKey)
+            if UserManager().isLoggedIn {
+                defaults.stringArray(forKey: sourceSubscriptionListKey)?.forEach({ (category) in
+                    try! editor.addToStringArray(item: category, forKey: sourceSubscriptionListKey)
+                })
+            }
         }
-
-        editor.save()
     }
 }

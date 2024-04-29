@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         BatchPush.disableAutomaticIntegration()
         BatchPush.supportsAppNotificationSettings = true
-        Batch.start(withAPIKey: BatchAPIKey)
+        BatchSDK.start(withAPIKey: BatchAPIKey)
         
         BatchPush.refreshToken()
         
@@ -58,11 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-    
-    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [AnyHashable : Any], completionHandler: @escaping () -> Void) {
-        BatchPush.handleNotification(userInfo, actionIdentifier: identifier)
-        completionHandler()
     }
 }
 

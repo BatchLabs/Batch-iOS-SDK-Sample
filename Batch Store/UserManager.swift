@@ -55,15 +55,14 @@ class UserManager {
     
     func syncBatchUserInfo() {
         let username = self.username
-        let editor = BatchUser.editor()
-        if let firstName = self.firstName {
-            try? editor.set(attribute: firstName, forKey: "firstname")
-        } else {
-            editor.removeAttribute(forKey: "firstname")
+        BatchProfile.identify(username)
+        BatchProfile.editor { editor in
+            if let firstName = self.firstName {
+                try! editor.set(attribute: firstName, forKey: "firstname")
+            } else {
+                try! editor.removeAttribute(key: "firstname")
+            }
         }
-        editor.setIdentifier(username)
-        
-        editor.save()
         
         SubscriptionManager().syncDataWithBatch()
     }

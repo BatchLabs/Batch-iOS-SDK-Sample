@@ -7,15 +7,22 @@ class EventManager {
     
     // Track when the user starts playing an episode
     class func trackArticleVisit(_ article: Article) {
-        BatchUser.trackEvent("ARTICLE_VIEW", withLabel: article.name)
+        BatchProfile.trackEvent(name: "ARTICLE_VIEW", attributes: BatchEventAttributes { attrs in
+            attrs.put(article.name, forKey: "$label")
+            attrs.put(article.name, forKey: "name")
+        })
     }
     
     class func trackAddArticleToCart(_ article: Article) {
-        BatchUser.trackEvent("ADD_TO_CART", withLabel: article.name)
+        BatchProfile.trackEvent(name: "ADD_TO_CART", attributes: BatchEventAttributes { attrs in
+            attrs.put(article.name, forKey: "$label")
+            attrs.put(article.name, forKey: "name")
+        })
     }
     
     class func trackCheckout(_ amount: Double) {
-        BatchUser.trackEvent("CHECKOUT")
-        BatchUser.trackTransaction(withAmount: amount)
+        BatchProfile.trackEvent(name: "CHECKOUT", attributes: BatchEventAttributes { attrs in
+            attrs.put(amount, forKey: "amount")
+        })
     }
 }

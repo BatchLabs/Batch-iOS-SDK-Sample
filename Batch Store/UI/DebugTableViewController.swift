@@ -36,9 +36,7 @@ class DebugTableViewController: UITableViewController {
                 }
             }
         } else if (indexPath as NSIndexPath).section == 2 {
-            BatchUser.printDebugInformation()
-        } else if (indexPath as NSIndexPath).section == 3 {
-            if let vc = Batch.debugViewController() {
+            if let vc = BatchSDK.makeDebugViewController() {
                 present(vc, animated: true)
             }
         }
@@ -52,9 +50,9 @@ class DebugTableViewController: UITableViewController {
     
     func refreshInfo() {
         apiKey.text = BatchAPIKey
-        installID.text = BatchUser.installationID() ?? "<Unknown>"
+        installID.text = BatchUser.installationID ?? "<Unknown>"
         idfa.text = ASIdentifierManager.shared().advertisingIdentifier.uuidString
-        lastToken.text = BatchPush.lastKnownPushToken() ?? "<Unknown>"
+        lastToken.text = BatchPush.lastKnownPushToken ?? "<Unknown>"
     }
     
     @IBAction func shareAction(_ sender: AnyObject) {
@@ -64,9 +62,9 @@ class DebugTableViewController: UITableViewController {
         
         infos.append("Batch Store Debug information --\n\n")
         infos.append("API Key: \(BatchAPIKey)\n")
-        infos.append("InstallID: \(BatchUser.installationID() ?? "<Unknown>")\n")
+        infos.append("InstallID: \(BatchUser.installationID ?? "<Unknown>")\n")
         infos.append("IDFA: \(ASIdentifierManager.shared().advertisingIdentifier.uuidString)\n")
-        infos.append("Last known push token: \(BatchPush.lastKnownPushToken() ?? "<Unknown>")\n")
+        infos.append("Last known push token: \(BatchPush.lastKnownPushToken ?? "<Unknown>")\n")
         
         let activityViewcontroller = UIActivityViewController(activityItems: [infos], applicationActivities: nil)
         

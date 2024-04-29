@@ -33,7 +33,7 @@ class PushManager {
 
     func register() {
         
-        BatchPush.setNotificationsCategories(createActions())
+        UNUserNotificationCenter.current().setNotificationCategories(createActions())
         
         BatchPush.requestNotificationAuthorization()
         didTriggerSystemPopup = true

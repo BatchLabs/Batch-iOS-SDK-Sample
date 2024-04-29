@@ -1,12 +1,13 @@
 {
+  "originHash" : "5f89246a04dee0ba4dca6e1ee198e6b0de065df2e601f60373f2708688d9f1a9",
   "pins" : [
     {
       "identity" : "batch-ios-sdk",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BatchLabs/Batch-iOS-SDK.git",
       "state" : {
-        "revision" : "52640fa8f487e502e38e5d1d36a0e4c0006e546e",
-        "version" : "1.19.2"
+        "revision" : "6ac4230b9d21e1b837316a387ce1621906e58a5e",
+        "version" : "2.0.0"
       }
     },
     {
@@ -14,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BatchLabs/Batch-iOS-SDK-Extension",
       "state" : {
-        "revision" : "00e98d801be70ef8688e56a8f5a9bc9042307288",
-        "version" : "2.0.1"
+        "revision" : "eac32b7b218a2e36e41353d35290e67c678027a5",
+        "version" : "3.0.3"
       }
     },
     {
@@ -28,5 +29,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
