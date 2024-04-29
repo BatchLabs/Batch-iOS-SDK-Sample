@@ -1,7 +1,6 @@
 ![Logo](https://static.batch.com/documentation/Readmes/logo_batch_full_178.png)
 
 # Batch store
-Sample mCommerce (Batch Store) for sales.
 This sample is a full fledged example meant to show both basic and advanced integrations of the Batch SDK with a real-world use case.  
 
 # How run it
@@ -25,20 +24,25 @@ For example, you can choose to display an In-app promoting a discount when a use
 
 Sample app contains 3 triggers 
 ```swift
-// Track when the user select an article
+// Track when the user selects an article
 class func trackArticleVisit(_ article: Article) {
-    BatchUser.trackEvent("ARTICLE_VIEW", withLabel: article.name)
+    BatchProfile.trackEvent(name: "ARTICLE_VIEW", attributes: BatchEventAttributes { attrs in
+        attrs.put(article.name, forKey: "$label")
+        attrs.put(article.name, forKey: "article")
+    })
 }
 
 // Track when the user add article to cart
 class func trackAddArticleToCart(_ article: Article) {
-    BatchUser.trackEvent("ADD_TO_CART", withLabel: article.name)
+    BatchProfile.trackEvent(name: "ADD_TO_CART", attributes: BatchEventAttributes { attrs in
+        attrs.put(article.name, forKey: "$label")
+        attrs.put(article.name, forKey: "article")
+    })
 }
 
 // Track when the user proceed to checkout
 class func trackCheckout(_ amount: Double) {
-    BatchUser.trackEvent("CHECKOUT")
-    BatchUser.trackTransaction(withAmount: amount)
+    BatchProfile.trackEvent(name: "CHECKOUT")
 }
 ```
 This triggers can be use in the Batch dashboard with labels. 
