@@ -28,13 +28,14 @@ class NotificationCell : UITableViewCell {
 }
 
 class ImageNotificationCell : NotificationCell {
-    
     @IBOutlet weak var attachmentImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        attachmentImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        Task { @MainActor in
+            attachmentImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        }
     }
     
     override func update(notification: BatchInboxNotificationContent) {

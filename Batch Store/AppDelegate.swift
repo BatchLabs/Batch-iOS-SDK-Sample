@@ -5,7 +5,7 @@ import Batch
 
 let BatchAPIKey = "put your apikey here"
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?

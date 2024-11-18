@@ -10,14 +10,14 @@ struct SystemAppearance {
         UIUserInterfaceStyle.init(rawValue: UserDefaults.standard.integer(forKey: systemAppearanceUserDefaultsKey)) ?? UIUserInterfaceStyle.unspecified
     }
     
-    static func set(_ appearance: UIUserInterfaceStyle) {
+    @MainActor static func set(_ appearance: UIUserInterfaceStyle) {
         UserDefaults.standard.set(appearance.rawValue, forKey: systemAppearanceUserDefaultsKey)
         if let keyWindow = UIWindow.keyWindowFromSceneAPI {
             apply(window: keyWindow)
         }
     }
     
-    static func apply(window: UIWindow) {
+    @MainActor static func apply(window: UIWindow) {
         window.overrideUserInterfaceStyle = get()
     }
 }

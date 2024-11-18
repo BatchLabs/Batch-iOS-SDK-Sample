@@ -1,6 +1,8 @@
 import UIKit
 import Batch
 
+extension UNNotificationSettings: @unchecked @retroactive Sendable { }
+
 class SettingsTableViewController: UITableViewController {
 
     @IBOutlet weak var loginButton: UIButton!
@@ -111,18 +113,18 @@ class SettingsTableViewController: UITableViewController {
         
         // Set the "enable push notifications" switch value according to the system settings
         // It is a special toggle
-        if let notifSettings = UIApplication.shared.currentUserNotificationSettings {
-            enablePush.isOn = notifSettings.types.rawValue != 0
-        } else {
-            enablePush.isOn = false
+        Task { @MainActor in
+            let settings = await UNUserNotificationCenter.current().notificationSettings()
+            enablePush.isOn = settings.alertSetting.rawValue != 0
+            
+            // If push is not enabled, force disable every other switch
+            if !enablePush.isOn {
+                notificationSwitches.filter {$0 != enablePush}.forEach({ (notifSwitch) in
+                    notifSwitch.isEnabled = false
+                })
+            }
         }
-        
-        // If push is not enabled, force disable every other switch
-        if !enablePush.isOn {
-            notificationSwitches.filter {$0 != enablePush}.forEach({ (notifSwitch) in
-                notifSwitch.isEnabled = false
-            })
-        }
+    
         
         let oldLoginLabel = loginButton.currentTitle
         
@@ -245,3 +247,4 @@ class SettingsTableViewController: UITableViewController {
 fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
 	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }
+

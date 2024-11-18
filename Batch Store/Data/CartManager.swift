@@ -2,7 +2,7 @@ import Foundation
 
 let CartArticlesUpdatedNotificationName = NSNotification.Name(rawValue: "CartArticlesUpdatedNotification")
 
-class CartManager {
+actor CartManager {
     static var articles: [Article] = []
     
     static func add(_ article: Article) {

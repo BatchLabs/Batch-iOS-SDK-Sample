@@ -2,21 +2,21 @@ import Foundation
 import UserNotifications
 import Batch
 
-@objc
-class NotificationCenterDelegate: NSObject, UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+class NotificationCenterDelegate: NSObject, @preconcurrency UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
         BatchPush.handle(userNotificationCenter: center, willPresent: notification, willShowSystemForegroundAlert: true)
-        completionHandler([.alert, .sound, .badge])
+        
+        return [.sound, .badge, .banner, .list]
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
         BatchPush.handle(userNotificationCenter: center, didReceive: response)
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?) {
+    @MainActor func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?) {
         let settingsNavVC = UIStoryboard(name: "Settings", bundle: nil).instantiateViewController(withIdentifier: "settingsNavigationController")
         // Try to find the best VC to display the settings on
-        if let presenterVC = UIApplication.shared.keyWindow?.rootViewController?.visibleViewController {
+        if let presenterVC = UIApplication.shared.windows.first(where: \.isKeyWindow)?.rootViewController?.visibleViewController {
             presenterVC.present(settingsNavVC, animated: true, completion: nil)
         }
     }
