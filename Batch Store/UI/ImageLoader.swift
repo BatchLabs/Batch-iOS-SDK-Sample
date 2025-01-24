@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class ImageLoader {
+actor ImageLoader {
     
     private static var cache: [String: UIImage?] = [:]
     
