@@ -3,12 +3,14 @@ import UserNotifications
 import Batch
 
 class NotificationCenterDelegate: NSObject, @preconcurrency UNUserNotificationCenterDelegate {
+    @MainActor
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
         BatchPush.handle(userNotificationCenter: center, willPresent: notification, willShowSystemForegroundAlert: true)
         
         return [.sound, .badge, .banner, .list]
     }
-    
+
+    @MainActor
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
         BatchPush.handle(userNotificationCenter: center, didReceive: response)
     }

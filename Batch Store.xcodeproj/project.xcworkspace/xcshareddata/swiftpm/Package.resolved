@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BatchLabs/Batch-iOS-SDK.git",
       "state" : {
-        "revision" : "6ac4230b9d21e1b837316a387ce1621906e58a5e",
-        "version" : "2.0.0"
+        "revision" : "4c6c2b321d65eebd2df6f048395b2f3168ec24b2",
+        "version" : "3.0.1"
       }
     },
     {
